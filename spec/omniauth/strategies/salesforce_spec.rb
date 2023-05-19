@@ -99,7 +99,7 @@ describe OmniAuth::Strategies::Salesforce do
 			}
 		}
 		let(:client) {
-			OAuth2::Client.new 'id', 'secret', {:site => 'example.com'}
+			OAuth2::Client.new('id', 'secret', { site: 'example.com' })
 		}
 		let(:access_token) {
 			OAuth2::AccessToken.from_hash client, {
@@ -229,12 +229,13 @@ describe OmniAuth::Strategies::Salesforce do
 
 			context "when the signature does not match" do
 				before do
-					access_token = OAuth2::AccessToken.from_hash strategy.access_token.client, {
+					access_token = OAuth2::AccessToken.from_hash(strategy.access_token.client, {
+						'access_token' => 'token',
 						'id' => 'forged client id',
 						'issued_at' => issued_at,
 						'instance_url' => 'http://instance.salesforce.example',
 						'signature' => signature
-					}
+					})
 					allow(strategy).to receive(:access_token).and_return(access_token)
 				end
 
@@ -246,12 +247,13 @@ describe OmniAuth::Strategies::Salesforce do
 
 			context "when the signature does match" do
 				before do
-					access_token = OAuth2::AccessToken.from_hash strategy.access_token.client, {
+					access_token = OAuth2::AccessToken.from_hash(strategy.access_token.client, {
+						'access_token' => 'token',
 						'id' => client_id,
 						'issued_at' => issued_at,
 						'instance_url' => 'http://instance.salesforce.example',
 						'signature' => signature
-					}
+					})
 					allow(strategy).to receive(:access_token).and_return(access_token)
 				end
 
