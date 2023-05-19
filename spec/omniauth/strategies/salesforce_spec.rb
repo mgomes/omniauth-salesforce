@@ -99,7 +99,7 @@ describe OmniAuth::Strategies::Salesforce do
 			}
 		}
 		let(:client) {
-			OAuth2::Client.new 'id', 'secret', {:site => 'example.com'}
+			OAuth2::Client.new('id', 'secret', { site: 'example.com' })
 		}
 		let(:access_token) {
 			OAuth2::AccessToken.from_hash client, {
